@@ -1,0 +1,794 @@
+{
+  "template_data": {
+    "category": [
+      {
+        "name": "general",
+        "subcategory": [
+          {
+            "name": "Time",
+            "item": [
+              {
+                "variable": "$time_zone",
+                "default_value": "auto",
+                "description": "Time Zone",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Time zone of Endpoint Manager",
+                    "value": "auto"
+                  },
+                  {
+                    "text": "GMT+02:00 Kaliningrad / Helsinki, Kyiv",
+                    "value": "34"
+                  },
+                  {
+                    "text": "GMT+03:00 Moscow, St. Petersburg",
+                    "value": "40"
+                  },
+                  {
+                    "text": "GMT+04:00 Samara / Abu Dhabi",
+                    "value": "43"
+                  },
+                  {
+                    "text": "GMT+05:00 Yekaterinburg",
+                    "value": "46"
+                  },
+                  {
+                    "text": "GMT+06:00 Omsk / Novosibirsk",
+                    "value": "50"
+                  },
+                  {
+                    "text": "GMT+07:00 Krasnoyarsk",
+                    "value": "54"
+                  },
+                  {
+                    "text": "GMT+08:00 Irkutsk",
+                    "value": "60"
+                  },
+                  {
+                    "text": "GMT+09:00 Yakutsk",
+                    "value": "63"
+                  },
+                  {
+                    "text": "GMT+10:00 Vladivostok",
+                    "value": "67"
+                  },
+                  {
+                    "text": "GMT+11:00 Magadan",
+                    "value": "71"
+                  },
+                  {
+                    "text": "GMT+12:00 Kamchatka",
+                    "value": "72"
+                  },
+                  {
+                    "text": "GMT London",
+                    "value": "25"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$sntp_server",
+                "default_value": "",
+                "description": "SNTP Server (empty: time server of Endpoint Manager)",
+                "type": "input",
+                "max_chars": "32"
+              }
+            ]
+          },
+          {
+            "name": "Phone",
+            "item": [
+              {
+                "variable": "$language",
+                "default_value": "12",
+                "description": "Language",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Russian",
+                    "value": "12"
+                  },
+                  {
+                    "text": "English",
+                    "value": "1"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$lcd_logo",
+                "default_value": "",
+                "description": "Greeting on the display (empty: keep the one of the phone)",
+                "type": "input",
+                "max_chars": "16"
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$signal_standard",
+                "default_value": "19",
+                "description": "Tones (dial, busy, ring back)",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Russia",
+                    "value": "19"
+                  },
+                  {
+                    "text": "Germany",
+                    "value": "2"
+                  },
+                  {
+                    "text": "United Kingdom",
+                    "value": "13"
+                  },
+                  {
+                    "text": "USA",
+                    "value": "11"
+                  },
+                  {
+                    "text": "China",
+                    "value": "1"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$call_waiting",
+                "default_value": "1",
+                "description": "Call Waiting",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Enabled",
+                    "value": "1"
+                  },
+                  {
+                    "text": "Disabled",
+                    "value": "0"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Dialing",
+            "item": [
+              {
+                "variable": "$dial_end_hash",
+                "default_value": "1",
+                "description": "# ends the number",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Yes",
+                    "value": "1"
+                  },
+                  {
+                    "text": "No",
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$dial_timeout",
+                "default_value": "5",
+                "description": "Dial timeout, seconds",
+                "type": "input",
+                "max_chars": "2"
+              }
+            ]
+          },
+          {
+            "name": "Audio",
+            "item": [
+              {
+                "variable": "$codec1",
+                "default_value": "0",
+                "description": "Codec 1",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "G.711 A-law (PCMA)",
+                    "value": "0"
+                  },
+                  {
+                    "text": "G.711 u-law (PCMU)",
+                    "value": "1"
+                  },
+                  {
+                    "text": "G.729",
+                    "value": "17"
+                  },
+                  {
+                    "text": "G.723",
+                    "value": "15"
+                  },
+                  {
+                    "text": "None",
+                    "value": "-1"
+                  }
+                ]
+              },
+              {
+                "variable": "$codec2",
+                "default_value": "1",
+                "description": "Codec 2",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "G.711 A-law (PCMA)",
+                    "value": "0"
+                  },
+                  {
+                    "text": "G.711 u-law (PCMU)",
+                    "value": "1"
+                  },
+                  {
+                    "text": "G.729",
+                    "value": "17"
+                  },
+                  {
+                    "text": "G.723",
+                    "value": "15"
+                  },
+                  {
+                    "text": "None",
+                    "value": "-1"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$codec3",
+                "default_value": "17",
+                "description": "Codec 3",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "G.711 A-law (PCMA)",
+                    "value": "0"
+                  },
+                  {
+                    "text": "G.711 u-law (PCMU)",
+                    "value": "1"
+                  },
+                  {
+                    "text": "G.729",
+                    "value": "17"
+                  },
+                  {
+                    "text": "G.723",
+                    "value": "15"
+                  },
+                  {
+                    "text": "None",
+                    "value": "-1"
+                  }
+                ]
+              },
+              {
+                "variable": "$codec4",
+                "default_value": "-1",
+                "description": "Codec 4",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "G.711 A-law (PCMA)",
+                    "value": "0"
+                  },
+                  {
+                    "text": "G.711 u-law (PCMU)",
+                    "value": "1"
+                  },
+                  {
+                    "text": "G.729",
+                    "value": "17"
+                  },
+                  {
+                    "text": "G.723",
+                    "value": "15"
+                  },
+                  {
+                    "text": "None",
+                    "value": "-1"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$vad",
+                "default_value": "0",
+                "description": "VAD (silence suppression)",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Disabled",
+                    "value": "0"
+                  },
+                  {
+                    "text": "Enabled",
+                    "value": "1"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Volume and Ring",
+            "item": [
+              {
+                "variable": "$ringtone_vol",
+                "default_value": "",
+                "description": "Ring volume",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Keep phone value",
+                    "value": ""
+                  },
+                  {
+                    "text": "1",
+                    "value": "1"
+                  },
+                  {
+                    "text": "2",
+                    "value": "2"
+                  },
+                  {
+                    "text": "3",
+                    "value": "3"
+                  },
+                  {
+                    "text": "4",
+                    "value": "4"
+                  },
+                  {
+                    "text": "5",
+                    "value": "5"
+                  },
+                  {
+                    "text": "6",
+                    "value": "6"
+                  },
+                  {
+                    "text": "7",
+                    "value": "7"
+                  },
+                  {
+                    "text": "8",
+                    "value": "8"
+                  },
+                  {
+                    "text": "9",
+                    "value": "9"
+                  }
+                ]
+              },
+              {
+                "variable": "$ring_type",
+                "default_value": "",
+                "description": "Ring melody",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Keep phone value",
+                    "value": ""
+                  },
+                  {
+                    "text": "Type 1",
+                    "value": "1"
+                  },
+                  {
+                    "text": "Type 2",
+                    "value": "2"
+                  },
+                  {
+                    "text": "Type 3",
+                    "value": "3"
+                  },
+                  {
+                    "text": "Type 4",
+                    "value": "4"
+                  },
+                  {
+                    "text": "Type 5",
+                    "value": "5"
+                  },
+                  {
+                    "text": "Type 6",
+                    "value": "6"
+                  },
+                  {
+                    "text": "Type 7",
+                    "value": "7"
+                  },
+                  {
+                    "text": "Type 8",
+                    "value": "8"
+                  },
+                  {
+                    "text": "Type 9",
+                    "value": "9"
+                  },
+                  {
+                    "text": "User 1",
+                    "value": "101"
+                  },
+                  {
+                    "text": "User 2",
+                    "value": "102"
+                  },
+                  {
+                    "text": "User 3",
+                    "value": "103"
+                  },
+                  {
+                    "text": "User 4",
+                    "value": "104"
+                  },
+                  {
+                    "text": "User 5",
+                    "value": "105"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$output_vol",
+                "default_value": "",
+                "description": "Handset volume",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Keep phone value",
+                    "value": ""
+                  },
+                  {
+                    "text": "1",
+                    "value": "1"
+                  },
+                  {
+                    "text": "2",
+                    "value": "2"
+                  },
+                  {
+                    "text": "3",
+                    "value": "3"
+                  },
+                  {
+                    "text": "4",
+                    "value": "4"
+                  },
+                  {
+                    "text": "5",
+                    "value": "5"
+                  },
+                  {
+                    "text": "6",
+                    "value": "6"
+                  },
+                  {
+                    "text": "7",
+                    "value": "7"
+                  },
+                  {
+                    "text": "8",
+                    "value": "8"
+                  },
+                  {
+                    "text": "9",
+                    "value": "9"
+                  }
+                ]
+              },
+              {
+                "variable": "$input_vol",
+                "default_value": "",
+                "description": "Microphone volume",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Keep phone value",
+                    "value": ""
+                  },
+                  {
+                    "text": "1",
+                    "value": "1"
+                  },
+                  {
+                    "text": "2",
+                    "value": "2"
+                  },
+                  {
+                    "text": "3",
+                    "value": "3"
+                  },
+                  {
+                    "text": "4",
+                    "value": "4"
+                  },
+                  {
+                    "text": "5",
+                    "value": "5"
+                  },
+                  {
+                    "text": "6",
+                    "value": "6"
+                  },
+                  {
+                    "text": "7",
+                    "value": "7"
+                  },
+                  {
+                    "text": "8",
+                    "value": "8"
+                  },
+                  {
+                    "text": "9",
+                    "value": "9"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$handfree_vol",
+                "default_value": "",
+                "description": "Speakerphone volume",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Keep phone value",
+                    "value": ""
+                  },
+                  {
+                    "text": "1",
+                    "value": "1"
+                  },
+                  {
+                    "text": "2",
+                    "value": "2"
+                  },
+                  {
+                    "text": "3",
+                    "value": "3"
+                  },
+                  {
+                    "text": "4",
+                    "value": "4"
+                  },
+                  {
+                    "text": "5",
+                    "value": "5"
+                  },
+                  {
+                    "text": "6",
+                    "value": "6"
+                  },
+                  {
+                    "text": "7",
+                    "value": "7"
+                  },
+                  {
+                    "text": "8",
+                    "value": "8"
+                  },
+                  {
+                    "text": "9",
+                    "value": "9"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "SIP",
+            "item": [
+              {
+                "variable": "$dtmf_mode",
+                "default_value": "1",
+                "description": "DTMF",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "RFC2833",
+                    "value": "1"
+                  },
+                  {
+                    "text": "SIP INFO",
+                    "value": "2"
+                  },
+                  {
+                    "text": "In audio (inband)",
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$reg_ttl",
+                "default_value": "60",
+                "description": "Registration expires, seconds",
+                "type": "input",
+                "max_chars": "5"
+              }
+            ]
+          },
+          {
+            "name": "Security",
+            "item": [
+              {
+                "variable": "$accept_any_call",
+                "default_value": "0",
+                "description": "Calls not from the PBX (direct IP)",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Reject",
+                    "value": "0"
+                  },
+                  {
+                    "text": "Accept",
+                    "value": "1"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$guest_password",
+                "default_value": "",
+                "description": "Password of the web user \"guest\" (empty: keep; needs Phone Admin Password)",
+                "type": "input",
+                "max_chars": "16"
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$keypad_password",
+                "default_value": "",
+                "description": "Password of the menu on the phone keypad (empty: keep)",
+                "type": "input",
+                "max_chars": "8"
+              }
+            ]
+          },
+          {
+            "name": "Function Key F1",
+            "item": [
+              {
+                "variable": "$fkey1_type",
+                "default_value": "",
+                "description": "Type",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Keep phone value",
+                    "value": ""
+                  },
+                  {
+                    "text": "Function (Value: F_MWI = voicemail)",
+                    "value": "4"
+                  },
+                  {
+                    "text": "Speed dial (Value: number)",
+                    "value": "1"
+                  },
+                  {
+                    "text": "Line",
+                    "value": "2"
+                  },
+                  {
+                    "text": "DTMF",
+                    "value": "5"
+                  },
+                  {
+                    "text": "None",
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$fkey1_value",
+                "default_value": "",
+                "description": "Value",
+                "type": "input",
+                "max_chars": "30"
+              },
+              {
+                "variable": "$fkey1_title",
+                "default_value": "",
+                "description": "Title",
+                "type": "input",
+                "max_chars": "16"
+              }
+            ]
+          },
+          {
+            "name": "Maintenance",
+            "item": [
+              {
+                "variable": "$dhcp_option66",
+                "default_value": "1",
+                "description": "Take the provisioning server from DHCP option 66",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "Yes",
+                    "value": "1"
+                  },
+                  {
+                    "text": "No",
+                    "value": "0"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Autoprovisioning",
+            "item": [
+              {
+                "variable": "$download_mode",
+                "default_value": "2",
+                "description": "Download the configuration",
+                "type": "list",
+                "data": [
+                  {
+                    "text": "On boot and every N hours",
+                    "value": "2"
+                  },
+                  {
+                    "text": "Only on boot",
+                    "value": "1"
+                  },
+                  {
+                    "text": "Never (stop provisioning)",
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "type": "break"
+              },
+              {
+                "variable": "$download_interval",
+                "default_value": "1",
+                "description": "Every N hours",
+                "type": "input",
+                "max_chars": "3"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

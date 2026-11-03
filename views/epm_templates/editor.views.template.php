@@ -82,42 +82,25 @@
                                 <h3 class="panel-title"><i class="fa  fa-file-code-o fa-lg"></i> <?php echo _("Edit File Configurations")?></h3>
                             </div>
                             <div class="panel-body">
-                                <?php 
-								
-								//$list_all_files = array();
-                                //if ($dtemplate['alt'] != 0) {
-								//	$list_all_files = array_merge($dtemplate['alt_configs'], $dtemplate['only_configs']);
-								//}
-								//else {
-								//	$list_all_files = $dtemplate['only_configs'];
-								//}
-                                
-								
-								$list_all_files = FreePBX::Endpointman()->epm_templates->edit_template_display_files_list($_REQUEST['idsel'],$_REQUEST['custom']);
-                                foreach($list_all_files as $row): 
-								//config.php?display=epm_templates&subpage=&custom=0&idsel=41
-								$row['idrefbox'] = $row['id']."_".$row['id_d']."_".$row['id_p'];
-                                ?>
-								<div class="col-md-12">
-                                	<div class="input-group input-group-br files_edit_configs" name="boxselect_<?php echo $row['idrefbox']; ?>" id="boxselect_<?php echo $row['idrefbox']; ?>">
-                                        <select 
-                                        	class="form-control selectpicker show-tick" 
-                                            data-url="ajax.php?module=endpointman&amp;module_sec=epm_templates&amp;module_tab=editor&amp;command=list_files_edit&amp;idsel=<?php echo $_REQUEST['idsel']; ?>&amp;custom=<?php echo $_REQUEST['custom']; ?>&amp;namefile=<?php echo $row['name']; ?>"
-											data-cache="false"
-                                            data-id = "id"
-											data-label = "name"
-                                            data-style = ""
-											data-live-search-placeholder = "Search..."
-											data-live-search = "true"
-                                            name="config_files[<?php echo $row['id']; ?>]" 
-                                            id="config_files[<?php echo $row['id']; ?>]">
-                                        </select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" name="bt_boxselect_<?php echo $row['idrefbox']; ?>" id="bt_boxselect_<?php echo $row['idrefbox']; ?>"><i class='fa fa-files-o'>&nbsp;</i></button>
-                                        </span>
-                                    </div>
+								<p class="text-muted"><?php echo _("Which version of each configuration file of the package is used. Copies of a file are created and edited in Advanced &rarr; Product Options/Config Editor (\"Save As\"); there you can add any parameter of the phone.")?></p>
+								<?php foreach (($dtemplate['config_files_select'] ?? array()) as $cf) : ?>
+								<div class="form-group row">
+									<label class="col-md-4 col-form-label" for="config_files_<?php echo htmlspecialchars($cf['key']); ?>"><code><?php echo htmlspecialchars($cf['file']); ?></code></label>
+									<div class="col-md-8">
+										<div class="input-group">
+											<select class="form-control" name="config_files[<?php echo htmlspecialchars($cf['file']); ?>]" id="config_files_<?php echo htmlspecialchars($cf['key']); ?>">
+												<option value="0"><?php echo _("Original (package)")?></option>
+												<?php foreach ($cf['options'] as $opt) : ?>
+													<option value="<?php echo (int)$opt['id']; ?>" <?php echo $cf['selected'] == $opt['id'] ? 'selected' : ''; ?>><?php echo htmlspecialchars($opt['name']); ?></option>
+												<?php endforeach; ?>
+											</select>
+											<span class="input-group-append">
+												<a class="btn btn-default" href="config.php?display=epm_advanced&amp;subpage=poce" target="_blank" title="<?php echo _("Edit copies of the file (POCE)")?>"><i class="fa fa-pencil"></i></a>
+											</span>
+										</div>
+									</div>
 								</div>
-                                <?php endforeach; ?> 
+								<?php endforeach; ?>
                             </div>
                         </div>
 	                </div>
@@ -205,10 +188,23 @@
 	<div class="">
 		<div class="row">
 			<div class="col-md-12">
-				<div id="main-slider" class="liquid-slider">
-				<?php foreach($dtemplate['template_editor'] as $row) : ?> <!-- INI foreach de tabs -->
-					<div>
-                        <h2 class="title"><?php echo $row['title'];?></h2>
+				<!-- Template settings as Bootstrap tabs (the liquid-slider was hidden by its CSS and never initialized) -->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="fa fa-sliders"></i> <?php echo _("Template Settings")?></h3>
+					</div>
+					<div class="panel-body">
+				<ul class="nav nav-tabs" role="tablist" id="epm_template_settings_tabs">
+				<?php foreach(array_values($dtemplate['template_editor']) as $i => $row) : ?>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link<?php echo $i == 0 ? ' active' : ''; ?>" data-toggle="tab" href="#epm_tpl_tab_<?php echo $i; ?>" role="tab" aria-controls="epm_tpl_tab_<?php echo $i; ?>"><?php echo htmlspecialchars($row['title']); ?></a>
+					</li>
+				<?php endforeach; ?>
+				</ul>
+				<div class="tab-content" id="main-slider">
+				<?php foreach(array_values($dtemplate['template_editor']) as $tab_i => $row) : ?> <!-- INI foreach de tabs -->
+					<div class="tab-pane<?php echo $tab_i == 0 ? ' active show' : ''; ?>" id="epm_tpl_tab_<?php echo $tab_i; ?>" role="tabpanel">
+                        <br>
                     	<?php 
 						foreach($row['data'] as $srow) 	//INI foreach objetos de cada tab
 						{
@@ -231,7 +227,7 @@
                                                             <i class="fa fa-question-circle fpbx-help-icon" data-for="<?php echo $srow['key']; ?>"></i>
                                                         </div>
                                                         <div class="col-md-9">
-															<input type="text" class="form-control" id="<?php echo $srow['key']; ?>" name="<?php echo $srow['key']; ?>" placeholder="" value="<?php echo $srow['value']; ?>" size="<?php echo (isset($srow['max_chars']) ? $srow['max_chars'] : "90" ); ?>">
+															<input type="text" class="form-control" id="<?php echo htmlspecialchars($srow['key']); ?>" name="<?php echo htmlspecialchars($srow['key']); ?>" placeholder="<?php echo htmlspecialchars($srow['placeholder'] ?? ''); ?>" value="<?php echo htmlspecialchars((string)$srow['value']); ?>" size="<?php echo (isset($srow['max_chars']) ? $srow['max_chars'] : "90" ); ?>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -497,6 +493,8 @@
 	                    </div>
 					<?php endforeach; ?> <!-- END foreach tabs -->
 				</div>
+					</div>
+				</div>
     		</div>
 	    </div>
     </div>
@@ -631,7 +629,7 @@ return;
 
 if($default_display) {
 	$sql = 'SELECT endpointman_template_list.*, endpointman_product_list.short_name as model_class, endpointman_model_list.model as model_clone, endpointman_model_list.enabled FROM endpointman_template_list, endpointman_model_list, endpointman_product_list WHERE endpointman_model_list.hidden = 0 AND endpointman_template_list.model_id = endpointman_model_list.id AND endpointman_template_list.product_id = endpointman_product_list.id';
- 	$template_list =& $endpoint->eda->sql($sql, 'getAll', DB_FETCHMODE_ASSOC);
+ 	$template_list =& $endpoint->eda->sql($sql, 'getAll', \PDO::FETCH_ASSOC);
  	$i = 0;
  	$row_out = array();
  	foreach($template_list as $row) {
@@ -643,10 +641,10 @@ if($default_display) {
  		$i++;
 	}
 	$sql = 'SELECT endpointman_mac_list.mac, endpointman_mac_list.id, endpointman_mac_list.model, endpointman_model_list.model as model_clone, endpointman_product_list.short_name as model_class FROM endpointman_mac_list, endpointman_model_list, endpointman_product_list WHERE  endpointman_product_list.id = endpointman_model_list.product_id AND endpointman_mac_list.global_custom_cfg_data IS NOT NULL AND endpointman_model_list.id = endpointman_mac_list.model AND endpointman_mac_list.template_id = 0';
-	$template_list =& $db->getAll($sql, array(), DB_FETCHMODE_ASSOC);
+	$template_list =& $db->getAll($sql, array(), \PDO::FETCH_ASSOC);
 	foreach($template_list as $row) {
 		$sql = 'SELECT  description , line FROM  endpointman_line_list WHERE  mac_id ='. $row['id'].' ORDER BY line ASC';
-		$line_list =& $db->getAll($sql, array(), DB_FETCHMODE_ASSOC);
+		$line_list =& $db->getAll($sql, array(), \PDO::FETCH_ASSOC);
 		$description = "";
 		$c = 0;
 		foreach($line_list as $line_row) {
@@ -663,7 +661,7 @@ if($default_display) {
 	}
 	
  	$sql = "SELECT DISTINCT endpointman_product_list.* FROM endpointman_product_list, endpointman_model_list WHERE endpointman_product_list.id = endpointman_model_list.product_id AND endpointman_model_list.hidden = 0 AND endpointman_model_list.enabled = 1 AND endpointman_product_list.hidden != 1 AND endpointman_product_list.cfg_dir !=  ''";
- 	$template_list =& $db->getAll($sql, array(), DB_FETCHMODE_ASSOC);
+ 	$template_list =& $db->getAll($sql, array(), \PDO::FETCH_ASSOC);
  	$i = 1;
  	$class_row[0]['value'] = 0;
  	$class_row[0]['text'] = "";

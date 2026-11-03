@@ -1,1 +1,4 @@
 templates/freepbx/compiled/*
+/.vscode/*
+/.phpunit.result.cache
+node_modules/

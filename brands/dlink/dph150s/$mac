@@ -1,0 +1,78 @@
+<<VOIP CONFIG FILE>>Version:{$config_version}
+
+<GLOBAL CONFIG MODULE>
+SNTP Server        :{$dlink_sntp_server}
+Enable SNTP        :1
+Time Zone          :{$dlink_time_zone}
+Enable Daylight    :0
+MMI Set            :{$language|12}
+
+<TELE CONFIG MODULE>
+Dial End With #    :{$dial_end_hash|1}
+Accept Any Call    :{$accept_any_call|0}
+Dial With Timeout  :1
+Dial Timeout value :{$dial_timeout|5}
+--Port Config--    :
+P1 CallWaiting     :{$call_waiting|1}
+
+<DSP CONFIG MODULE>
+Signal Standard    :{$signal_standard|19}
+VAD                :{$vad|0}
+{if condition="$ring_type != ''"}Ring Type          :{$ring_type}
+{/if}--Port Config--    :
+{if condition="$output_vol != ''"}P1 Output Vol      :{$output_vol}
+{/if}{if condition="$input_vol != ''"}P1 Input Vol       :{$input_vol}
+{/if}{if condition="$handfree_vol != ''"}P1 HandFree Vol    :{$handfree_vol}
+{/if}{if condition="$ringtone_vol != ''"}P1 RingTone Vol    :{$ringtone_vol}
+{/if}P1 First Codec     :{$codec1|0}
+P1 Second Codec    :{$codec2|1}
+P1 Third Codec     :{$codec3|17}
+P1 Forth Codec     :{$codec4|-1}
+
+<SIP CONFIG MODULE>
+--SIP Line List--  :
+{line_loop}SIP{$line} Phone Number  :{$username}
+SIP{$line} Display Name  :{$displayname}
+SIP{$line} Register Addr :{$server_host}
+SIP{$line} Register Port :{$server_port}
+SIP{$line} Register User :{$authname}
+SIP{$line} Register Pwd  :{$secret}
+SIP{$line} Register TTL  :{$reg_ttl|60}
+SIP{$line} Enable Reg    :1
+SIP{$line} Proxy Addr    :{$server_host}
+SIP{$line} Proxy Port    :{$server_port}
+SIP{$line} Proxy User    :{$authname}
+SIP{$line} Proxy Pwd     :{$secret}
+SIP{$line} DTMF Mode     :{$dtmf_mode|1}
+SIP{$line} Transport     :{$transport|0}
+SIP{$line} Mwi No.       :{$myvoicemail}
+{/line_loop}
+<MMI CONFIG MODULE>
+{if condition="$globaladminpassword != ''"}--MMI Account--    :
+Account1 Name      :admin
+Account1 Pass      :{$globaladminpassword}
+Account1 Level     :10
+{/if}{if condition="$dlink_guest_password != ''"}Account2 Name      :guest
+Account2 Pass      :{$dlink_guest_password}
+Account2 Level     :5
+{/if}
+<PHONE CONFIG MODULE>
+{if condition="$keypad_password != ''"}Keypad Password    :{$keypad_password}
+{/if}{if condition="$lcd_logo != ''"}LCD Logo           :{$lcd_logo}
+{/if}Phone Model        :{$model}
+{if condition="$fkey1_type != ''"}--Function Key--   :
+Fkey1 Type         :{$fkey1_type}
+Fkey1 Value        :{$fkey1_value}
+Fkey1 Title        :{$fkey1_title}
+{/if}
+<AUTOUPDATE CONFIG MODULE>
+Download Username  :{$dlink_prov_user}
+Download password  :{$dlink_prov_pass}
+Download Server IP :{$dlink_prov_server}
+Config File Name   :
+Download Protocol  :{$dlink_prov_protocol}
+Download Mode      :{$download_mode|2}
+Download Interval  :{$download_interval|1}
+DHCP Option 66     :{$dhcp_option66|1}
+
+<<END OF FILE>>

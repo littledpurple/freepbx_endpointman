@@ -1,0 +1,33 @@
+{
+  "data": {
+    "name": "D-Link DPH-150S h/w Fx (Fanvil) Models: [DPH-150S, DPH-150SE]",
+    "id": "1",
+    "directory": "dph150s",
+    "last_modified": "@LAST_MODIFIED@",
+    "description": "One text file per phone named after the MAC, version raised by Endpoint Manager",
+    "configuration_files": "$mac",
+    "changelog": "",
+    "provisioning_types": [
+      "http",
+      "tftp"
+    ],
+    "model_list": [
+      {
+        "model": "DPH-150S",
+        "lines": "2",
+        "id": "1",
+        "template_data": [
+          "template_data.json"
+        ]
+      },
+      {
+        "model": "DPH-150SE",
+        "lines": "2",
+        "id": "2",
+        "template_data": [
+          "template_data.json"
+        ]
+      }
+    ]
+  }
+}

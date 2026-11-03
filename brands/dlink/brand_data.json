@@ -1,0 +1,27 @@
+{
+  "data": {
+    "brands": {
+      "name": "D-Link",
+      "brand_id": "100",
+      "directory": "dlink",
+      "package": "dlink.tgz",
+      "md5sum": "",
+      "last_modified": "@LAST_MODIFIED@",
+      "family_list": [
+        {
+          "id": "1",
+          "name": "D-Link DPH-150S h/w Fx (Fanvil) Models: [DPH-150S, DPH-150SE]",
+          "directory": "dph150s",
+          "description": "One text file per phone named after the MAC, version raised by Endpoint Manager",
+          "changelog": "",
+          "last_modified": "@LAST_MODIFIED@"
+        }
+      ],
+      "oui_list": [
+        "84C9B2",
+        "FC7516"
+      ],
+      "changelog": "First package: DPH-150S (Fanvil firmware GE_1.00)"
+    }
+  }
+}

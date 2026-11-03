@@ -1,9 +1,7 @@
-RewriteEngine on
-RewriteCond %{THE_REQUEST} ^GET*
-RewriteRule ^(.*)$ p.php [QSA,L]
-
-RewriteCond %{THE_REQUEST} ^PUT*
-RewriteRule ^(.*)$ p.php [QSA,L]
-
-RewriteCond %{THE_REQUEST} ^POST*
-RewriteRule ^(.*)$ p.php [QSA,L]
+# Endpoint Manager: /provisioning/<file> -> p.php/<file> (phones that can not use .../p.php in the server URL)
+Options -Indexes
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)$ p.php/$1 [L,QSA]
+</IfModule>
